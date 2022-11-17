@@ -3,7 +3,7 @@
 Ecletic Routines for Categorizing Location Information Given on Social Media (Primarily Twitter) 
 
 ## Installation
-Pip install not working yet
+Pip install not working yet.  At this point, I am uploading the files.  Will reoganize when I have enough for a test install.
 
 ```bash
 $ pip install twitloccan
