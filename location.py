@@ -10,7 +10,7 @@ from geograpy import get_geoPlace_context
 
 # Takes a string and returns locational information
 
-# the 3contries
+# the 3countries
 
 
 
@@ -123,18 +123,38 @@ class GeoCasual:
         return False
 
 class C3:
-    def __init__(self,useNLTK=False,mxREC = 100000000000):
+    def __init__(self,useNLTK=False,useGEOGRPY=False,mxREC = 100000000000):
+       """ Determine country from text location string.
+       
+       Creates object given in response to location field is classified as either
+       Canadian, American or Other
+       
+       Parameters
+       __________
+       useNLTK  : bool
+           Make use of the NLTK library
+       useGEOGRPY : bool
+           Make use of the geograpy
+       mxREC : int
+           Maximum number of records to process
+           
+       Examples
+       ________
+       >>>  MyC3 = C3()
+       """ 
        self.retval = unknownC.UNKNOWN
        self.country = unknownC.UNKNOWN
        self.CAN = 11
        self.US = 12
        self.OTHER = 13
        self.useNLTK = useNLTK
+       self.useGEOGRPY = useGEOGRPY
        self.MAXREC = mxREC
        # Number of records search for in session
        self.RecNo = 0
        self.CasCoun = GeoCasual()
     def getC3(self,rawLoc):
+       
         self.RecNo += 1
         # two stage exit
         # first warn max is hit
@@ -154,7 +174,7 @@ class C3:
             return unknownC.JK
         if self.CasCoun.isNonUS_Can(rawLoc):
             return self.OTHER
-        if self.useNLTK is False:
+        if self.useGEOGRPY is False:
             return self.OTHER
         if self.isUS(rawLoc) is True:
              return self.US
@@ -181,9 +201,10 @@ class C3:
             return True
         if self.CasCoun.isCan(rawLoc):
             return True
-        if self.useNLTK == False: 
+        if self.useGEOGRPY == False: 
           return False
-        # from this point on use NLTK
+        # from this point on use geograpy
+        # unable to install properly
         self.places = get_geoPlace_context(text=rawLoc)
         try:
             if self.places.countries[0] == "Canada":
