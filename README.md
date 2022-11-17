@@ -1,8 +1,9 @@
 # TwitLocCan
 
-Ecletic Routines for Categorizing Location Information Given on Social Media (Primarily Twitter)
+Ecletic Routines for Categorizing Location Information Given on Social Media (Primarily Twitter) 
 
 ## Installation
+Pip install not working yet
 
 ```bash
 $ pip install twitloccan
